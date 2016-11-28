@@ -1,8 +1,8 @@
 var request = require('request');
 
-describe('get route',function(){
+describe('set route',function(){
 
-  it("should respond with hello world", function(done) {
+  it("should add to the variable", function(done) {
     request("http://localhost:4000/get", function(error, response, body){
       expect(body).toContain("hello world");
       done();
