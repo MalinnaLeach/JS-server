@@ -8,8 +8,8 @@ describe('set route',function(){
     });
   });
 
-  it("should display added test data", function(done) {
-    request("http://localhost:4000/test", function(error, response, body){
+  it("should add the specified data", function(done) {
+    request("http://localhost:4000/data", function(error, response, body){
       expect(body).toContain('{"bestfun":"coding"}');
       done();
     });
