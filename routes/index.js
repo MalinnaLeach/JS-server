@@ -1,31 +1,35 @@
 var express = require('express');
 var router = express.Router();
-var dataStore = [];
+var DataSave = require('../models/dataSave.js').DataSave;
+var dataManager = new DataSave();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  
+
 });
 
 router.get('/test', function(req, res, next) {
-  res.send(dataStore);
+  res.send(dataManager.dataStore);
 });
 
 router.get('/set', function(req, res, next) {
-  res.send("testing");
   for (var key in req.query) {
-    console.log(key);
+    dataManager.addData(key, req.query[key]);
   };
-});
-
-router.post('/get', function(req, res, next) {
-
+  res.redirect('/test');
 });
 
 router.get('/get', function(req, res, next) {
-  res.send("hello world")
+  var response = req.query;
+  var thisKey = response.key;
+  for (var i = 0; i < dataManager.dataStore.length; i++) {
+    for (var key in dataManager.dataStore[i]) {
+      if (key === thisKey) {
+        res.send(dataManager.dataStore[i][thisKey]);
+      }
+    }
+  }
 });
-
 
 
 module.exports = router;
